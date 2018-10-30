@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Courses.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Courses.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_1.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.aux" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.log" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.tex" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/Q3.png" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/Q3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb.txt" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -135,6 +130,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="810" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -174,8 +170,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb.txt">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8304" />
+      </provider>
     </entry>
   </component>
 </project>

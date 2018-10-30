@@ -1,0 +1,1831 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW0}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{statistical-learning---hw0}{%
+\section{Statistical learning - HW0}\label{statistical-learning---hw0}}
+
+    \hypertarget{pandas-data-analysis-in-python}{%
+\section{Pandas: data analysis in
+python}\label{pandas-data-analysis-in-python}}
+
+For data-intensive work in Python the
+\href{http://pandas.pydata.org}{Pandas} library has become essential.
+
+What is \texttt{pandas}?
+
+\begin{itemize}
+\tightlist
+\item
+  Pandas can be thought of as \emph{NumPy arrays with labels} for rows
+  and columns, and better support for heterogeneous data types, but it's
+  also much, much more than that.
+\item
+  Pandas can also be thought of as \texttt{R}'s \texttt{data.frame} in
+  Python.
+\item
+  Powerful for working with missing data, working with time series data,
+  for reading and writing your data, for reshaping, grouping, merging
+  your data, \ldots{}
+\end{itemize}
+
+Documentation: http://pandas.pydata.org/pandas-docs/stable/
+
+\textbf{When do you need pandas?}
+
+When working with \textbf{tabular or structured data} (like R dataframe,
+SQL table, Excel spreadsheet, \ldots{}):
+
+\begin{itemize}
+\tightlist
+\item
+  Import data
+\item
+  Clean up messy data
+\item
+  Explore data, gain insight into data
+\item
+  Process and prepare your data for analysis
+\item
+  Analyse your data (together with scikit-learn, statsmodels, \ldots{})
+\end{itemize}
+
+ATTENTION!:
+
+Pandas is great for working with heterogeneous and tabular 1D/2D data,
+but not all types of data fit in such structures!
+
+When working with array data (e.g.~images, numerical algorithms): just
+stick with numpy
+
+When working with multidimensional labeled data (e.g.~climate data):
+have a look at
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}329}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+          
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{8}
+\end{Verbatim}
+
+
+    \hypertarget{lets-start-with-a-showcase}{%
+\subsection{Let's start with a
+showcase}\label{lets-start-with-a-showcase}}
+
+\hypertarget{case-1-titanic-data}{%
+\paragraph{Case 1: Titanic data}\label{case-1-titanic-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}330}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{titanic\PYZhy{}train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}331}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}331}]:}    PassengerId  Survived  Pclass  \textbackslash{}
+          0            1         0       3   
+          1            2         1       1   
+          2            3         1       3   
+          3            4         1       1   
+          4            5         0       3   
+          
+                                                          Name     Sex   Age  SibSp  \textbackslash{}
+          0                            Braund, Mr. Owen Harris    male  22.0      1   
+          1  Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+          2                             Heikkinen, Miss. Laina  female  26.0      0   
+          3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+          4                           Allen, Mr. William Henry    male  35.0      0   
+          
+             Parch            Ticket     Fare Cabin Embarked  
+          0      0         A/5 21171   7.2500   NaN        S  
+          1      0          PC 17599  71.2833   C85        C  
+          2      0  STON/O2. 3101282   7.9250   NaN        S  
+          3      0            113803  53.1000  C123        S  
+          4      0            373450   8.0500   NaN        S  
+\end{Verbatim}
+            
+    \textbf{What is the age distribution of the passengers?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}332}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}332}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x111df2400>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+
+    \end{Verbatim}
+
+    \textbf{How does the survival rate of the passengers differ between
+sexes?}
+
+    lambda is a short function we can use without defining it first. it can
+be useful with pandas operation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{aggregate}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}         Survived
+         Sex             
+         female  0.742038
+         male    0.188908
+\end{Verbatim}
+            
+    \textbf{Or how does it differ between the different classes?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{aggregate}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x110706e48>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{the-pandas-data-structures-dataframe-and-series}{%
+\section{\texorpdfstring{The pandas data structures: \texttt{DataFrame}
+and
+\texttt{Series}}{The pandas data structures: DataFrame and Series}}\label{the-pandas-data-structures-dataframe-and-series}}
+
+A \texttt{DataFrame} is a \textbf{tablular data structure}
+(multi-dimensional object to hold labeled data) comprised of rows and
+columns, akin to a spreadsheet, database table, or R's data.frame
+object. You can think of it as multiple Series object which share the
+same index.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}      PassengerId  Survived  Pclass  \textbackslash{}
+         0              1         0       3   
+         1              2         1       1   
+         2              3         1       3   
+         3              4         1       1   
+         ..           {\ldots}       {\ldots}     {\ldots}   
+         887          888         1       1   
+         888          889         0       3   
+         889          890         1       1   
+         890          891         0       3   
+         
+                                                           Name     Sex   Age  SibSp  \textbackslash{}
+         0                              Braund, Mr. Owen Harris    male  22.0      1   
+         1    Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+         2                               Heikkinen, Miss. Laina  female  26.0      0   
+         3         Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+         ..                                                 {\ldots}     {\ldots}   {\ldots}    {\ldots}   
+         887                       Graham, Miss. Margaret Edith  female  19.0      0   
+         888           Johnston, Miss. Catherine Helen "Carrie"  female   NaN      1   
+         889                              Behr, Mr. Karl Howell    male  26.0      0   
+         890                                Dooley, Mr. Patrick    male  32.0      0   
+         
+              Parch            Ticket     Fare Cabin Embarked  
+         0        0         A/5 21171   7.2500   NaN        S  
+         1        0          PC 17599  71.2833   C85        C  
+         2        0  STON/O2. 3101282   7.9250   NaN        S  
+         3        0            113803  53.1000  C123        S  
+         ..     {\ldots}               {\ldots}      {\ldots}   {\ldots}      {\ldots}  
+         887      0            112053  30.0000   B42        S  
+         888      2        W./C. 6607  23.4500   NaN        S  
+         889      0            111369  30.0000  C148        C  
+         890      0            370376   7.7500   NaN        Q  
+         
+         [891 rows x 12 columns]
+\end{Verbatim}
+            
+    \hypertarget{attributes-of-the-dataframe}{%
+\subsubsection{Attributes of the
+DataFrame}\label{attributes-of-the-dataframe}}
+
+A DataFrame has besides a \texttt{index} attribute, also a
+\texttt{columns} attribute:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df}\PY{o}{.}\PY{n}{index}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} RangeIndex(start=0, stop=891, step=1)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Index(['PassengerId', 'Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
+                'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'],
+               dtype='object')
+\end{Verbatim}
+            
+    To check the data types of the different columns:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} PassengerId      int64
+         Survived         int64
+         Pclass           int64
+         Name            object
+                         {\ldots}   
+         Ticket          object
+         Fare           float64
+         Cabin           object
+         Embarked        object
+         Length: 12, dtype: object
+\end{Verbatim}
+            
+    An overview of that information can be given with the \texttt{info()}
+method:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+
+    \end{Verbatim}
+
+    Also a DataFrame has a \texttt{values} attribute, but attention: when
+you have heterogeneous data, all values will be upcasted:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([[1, 0, 3, {\ldots}, 7.25, nan, 'S'],
+                [2, 1, 1, {\ldots}, 71.2833, 'C85', 'C'],
+                [3, 1, 3, {\ldots}, 7.925, nan, 'S'],
+                {\ldots},
+                [889, 0, 3, {\ldots}, 23.45, nan, 'S'],
+                [890, 1, 1, {\ldots}, 30.0, 'C148', 'C'],
+                [891, 0, 3, {\ldots}, 7.75, nan, 'Q']], dtype=object)
+\end{Verbatim}
+            
+    Apart from importing your data from an external source (text file,
+excel, database, ..), one of the most common ways of creating a
+dataframe is from a dictionary of arrays or lists.
+
+Note that in the IPython notebook, the dataframe will display in a rich
+HTML view:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Belgium}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{France}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Germany}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Netherlands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United Kingdom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{11.3}\PY{p}{,} \PY{l+m+mf}{64.3}\PY{p}{,} \PY{l+m+mf}{81.3}\PY{p}{,} \PY{l+m+mf}{16.9}\PY{p}{,} \PY{l+m+mf}{64.9}\PY{p}{]}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{30510}\PY{p}{,} \PY{l+m+mi}{671308}\PY{p}{,} \PY{l+m+mi}{357050}\PY{p}{,} \PY{l+m+mi}{41526}\PY{p}{,} \PY{l+m+mi}{244820}\PY{p}{]}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{capital}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brussels}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Paris}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Berlin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amsterdam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{London}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{\PYZcb{}}
+         \PY{n}{df\PYZus{}countries} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+         \PY{n}{df\PYZus{}countries}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}      area    capital         country  population
+         0   30510   Brussels         Belgium        11.3
+         1  671308      Paris          France        64.3
+         2  357050     Berlin         Germany        81.3
+         3   41526  Amsterdam     Netherlands        16.9
+         4  244820     London  United Kingdom        64.9
+\end{Verbatim}
+            
+    \hypertarget{one-dimensional-data-series-a-column-of-a-dataframe}{%
+\subsubsection{\texorpdfstring{One-dimensional data: \texttt{Series} (a
+column of a
+DataFrame)}{One-dimensional data: Series (a column of a DataFrame)}}\label{one-dimensional-data-series-a-column-of-a-dataframe}}
+
+A Series is a basic holder for \textbf{one-dimensional labeled data}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 0      22.0
+         1      38.0
+         2      26.0
+         3      35.0
+                {\ldots} 
+         887    19.0
+         888     NaN
+         889    26.0
+         890    32.0
+         Name: Age, Length: 891, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{age} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{attributes-of-a-series-index-and-values}{%
+\subsubsection{\texorpdfstring{Attributes of a Series: \texttt{index}
+and
+\texttt{values}}{Attributes of a Series: index and values}}\label{attributes-of-a-series-index-and-values}}
+
+The Series has also an \texttt{index} and \texttt{values} attribute, but
+no \texttt{columns}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{age}\PY{o}{.}\PY{n}{index}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} RangeIndex(start=0, stop=891, step=1)
+\end{Verbatim}
+            
+    You can access the underlying numpy array representation with the
+\texttt{.values} attribute:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{age}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} array([22., 38., 26., 35., 35., nan, 54.,  2., 27., 14.])
+\end{Verbatim}
+            
+    We can access series values via the index, just like for NumPy arrays:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{age}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 22.0
+\end{Verbatim}
+            
+    Unlike the NumPy array, though, this index can be something other than
+integers:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}                                                     PassengerId  Survived  \textbackslash{}
+         Name                                                                        
+         Braund, Mr. Owen Harris                                       1         0   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}            2         1   
+         Heikkinen, Miss. Laina                                        3         1   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)                  4         1   
+         {\ldots}                                                         {\ldots}       {\ldots}   
+         Graham, Miss. Margaret Edith                                888         1   
+         Johnston, Miss. Catherine Helen "Carrie"                    889         0   
+         Behr, Mr. Karl Howell                                       890         1   
+         Dooley, Mr. Patrick                                         891         0   
+         
+                                                             Pclass     Sex   Age  \textbackslash{}
+         Name                                                                       
+         Braund, Mr. Owen Harris                                  3    male  22.0   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}       1  female  38.0   
+         Heikkinen, Miss. Laina                                   3  female  26.0   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)             1  female  35.0   
+         {\ldots}                                                    {\ldots}     {\ldots}   {\ldots}   
+         Graham, Miss. Margaret Edith                             1  female  19.0   
+         Johnston, Miss. Catherine Helen "Carrie"                 3  female   NaN   
+         Behr, Mr. Karl Howell                                    1    male  26.0   
+         Dooley, Mr. Patrick                                      3    male  32.0   
+         
+                                                             SibSp  Parch  \textbackslash{}
+         Name                                                               
+         Braund, Mr. Owen Harris                                 1      0   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}      1      0   
+         Heikkinen, Miss. Laina                                  0      0   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)            1      0   
+         {\ldots}                                                   {\ldots}    {\ldots}   
+         Graham, Miss. Margaret Edith                            0      0   
+         Johnston, Miss. Catherine Helen "Carrie"                1      2   
+         Behr, Mr. Karl Howell                                   0      0   
+         Dooley, Mr. Patrick                                     0      0   
+         
+                                                                       Ticket     Fare  \textbackslash{}
+         Name                                                                            
+         Braund, Mr. Owen Harris                                    A/5 21171   7.2500   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}          PC 17599  71.2833   
+         Heikkinen, Miss. Laina                              STON/O2. 3101282   7.9250   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)                  113803  53.1000   
+         {\ldots}                                                              {\ldots}      {\ldots}   
+         Graham, Miss. Margaret Edith                                  112053  30.0000   
+         Johnston, Miss. Catherine Helen "Carrie"                  W./C. 6607  23.4500   
+         Behr, Mr. Karl Howell                                         111369  30.0000   
+         Dooley, Mr. Patrick                                           370376   7.7500   
+         
+                                                            Cabin Embarked  
+         Name                                                               
+         Braund, Mr. Owen Harris                              NaN        S  
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}   C85        C  
+         Heikkinen, Miss. Laina                               NaN        S  
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)        C123        S  
+         {\ldots}                                                  {\ldots}      {\ldots}  
+         Graham, Miss. Margaret Edith                         B42        S  
+         Johnston, Miss. Catherine Helen "Carrie"             NaN        S  
+         Behr, Mr. Karl Howell                               C148        C  
+         Dooley, Mr. Patrick                                  NaN        Q  
+         
+         [891 rows x 11 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{age} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{age}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} Name
+         Braund, Mr. Owen Harris                                22.0
+         Cumings, Mrs. John Bradley (Florence Briggs Thayer)    38.0
+         Heikkinen, Miss. Laina                                 26.0
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)           35.0
+                                                                {\ldots} 
+         Graham, Miss. Margaret Edith                           19.0
+         Johnston, Miss. Catherine Helen "Carrie"                NaN
+         Behr, Mr. Karl Howell                                  26.0
+         Dooley, Mr. Patrick                                    32.0
+         Name: Age, Length: 891, dtype: float64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{age}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dooley, Mr. Patrick}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} 32.0
+\end{Verbatim}
+            
+    but with the power of numpy arrays. Many things you can do with numpy
+arrays, can also be applied on DataFrames / Series.
+
+Eg element-wise operations:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{age} \PY{o}{*} \PY{l+m+mi}{1000}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} Name
+         Braund, Mr. Owen Harris                                22000.0
+         Cumings, Mrs. John Bradley (Florence Briggs Thayer)    38000.0
+         Heikkinen, Miss. Laina                                 26000.0
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)           35000.0
+                                                                 {\ldots}   
+         Graham, Miss. Margaret Edith                           19000.0
+         Johnston, Miss. Catherine Helen "Carrie"                   NaN
+         Behr, Mr. Karl Howell                                  26000.0
+         Dooley, Mr. Patrick                                    32000.0
+         Name: Age, Length: 891, dtype: float64
+\end{Verbatim}
+            
+    A range of methods:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{age}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} 29.69911764705882
+\end{Verbatim}
+            
+    Fancy indexing, like indexing with a list or boolean indexing:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{age}\PY{p}{[}\PY{n}{age} \PY{o}{\PYZgt{}} \PY{l+m+mi}{70}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} Name
+         Goldschmidt, Mr. George B               71.0
+         Connors, Mr. Patrick                    70.5
+         Artagaveytia, Mr. Ramon                 71.0
+         Barkworth, Mr. Algernon Henry Wilson    80.0
+         Svensson, Mr. Johan                     74.0
+         Name: Age, dtype: float64
+\end{Verbatim}
+            
+    But also a lot of pandas specific methods, e.g.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} S    644
+         C    168
+         Q     77
+         Name: Embarked, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{data-import-and-export}{%
+\section{Data import and export}\label{data-import-and-export}}
+
+    A wide range of input/output formats are natively supported by pandas:
+
+\begin{itemize}
+\tightlist
+\item
+  CSV, text
+\item
+  SQL database
+\item
+  Excel
+\item
+  HDF5
+\item
+  json
+\item
+  html
+\item
+  pickle
+\item
+  sas, stata
+\item
+  (parquet)
+\item
+  \ldots{}
+\end{itemize}
+
+    Very powerful csv reader:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} pd.read\PYZus{}csv\PY{o}{?}
+\end{Verbatim}
+
+
+    Luckily, if we have a well formed csv file, we don't need many of those
+arguments:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{titanic\PYZhy{}train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}    PassengerId  Survived  Pclass  \textbackslash{}
+         0            1         0       3   
+         1            2         1       1   
+         2            3         1       3   
+         3            4         1       1   
+         4            5         0       3   
+         
+                                                         Name     Sex   Age  SibSp  \textbackslash{}
+         0                            Braund, Mr. Owen Harris    male  22.0      1   
+         1  Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+         2                             Heikkinen, Miss. Laina  female  26.0      0   
+         3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+         4                           Allen, Mr. William Henry    male  35.0      0   
+         
+            Parch            Ticket     Fare Cabin Embarked  
+         0      0         A/5 21171   7.2500   NaN        S  
+         1      0          PC 17599  71.2833   C85        C  
+         2      0  STON/O2. 3101282   7.9250   NaN        S  
+         3      0            113803  53.1000  C123        S  
+         4      0            373450   8.0500   NaN        S  
+\end{Verbatim}
+            
+    The default plot (when not specifying \texttt{kind}) is a line plot of
+all columns:
+
+    \hypertarget{selecting-and-filtering-data}{%
+\section{Selecting and filtering
+data}\label{selecting-and-filtering-data}}
+
+    ATTENTION!:
+
+One of pandas' basic features is the labeling of rows and columns, but
+this makes indexing also a bit more complex compared to numpy. We now
+have to distuinguish between:
+
+selection by \textbf{label}
+
+selection by \textbf{position}
+
+    \hypertarget{df-provides-some-convenience-shortcuts}{%
+\subsubsection{\texorpdfstring{\texttt{df{[}{]}} provides some
+convenience
+shortcuts}{df{[}{]} provides some convenience shortcuts}}\label{df-provides-some-convenience-shortcuts}}
+
+    For a DataFrame, basic indexing selects the columns.
+
+Selecting a single column:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 0      22.0
+         1      38.0
+         2      26.0
+         3      35.0
+                {\ldots} 
+         887    19.0
+         888     NaN
+         889    26.0
+         890    32.0
+         Name: Age, Length: 891, dtype: float64
+\end{Verbatim}
+            
+    or multiple columns:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:}       Age     Fare
+         0    22.0   7.2500
+         1    38.0  71.2833
+         2    26.0   7.9250
+         3    35.0  53.1000
+         ..    {\ldots}      {\ldots}
+         887  19.0  30.0000
+         888   NaN  23.4500
+         889  26.0  30.0000
+         890  32.0   7.7500
+         
+         [891 rows x 2 columns]
+\end{Verbatim}
+            
+    But, slicing accesses the rows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{df}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:}     PassengerId  Survived  Pclass                                  Name  \textbackslash{}
+         10           11         1       3       Sandstrom, Miss. Marguerite Rut   
+         11           12         1       1              Bonnell, Miss. Elizabeth   
+         12           13         0       3        Saundercock, Mr. William Henry   
+         13           14         0       3           Andersson, Mr. Anders Johan   
+         14           15         0       3  Vestrom, Miss. Hulda Amanda Adolfina   
+         
+                Sex   Age  SibSp  Parch     Ticket     Fare Cabin Embarked  
+         10  female   4.0      1      1    PP 9549  16.7000    G6        S  
+         11  female  58.0      0      0     113783  26.5500  C103        S  
+         12    male  20.0      0      0  A/5. 2151   8.0500   NaN        S  
+         13    male  39.0      1      5     347082  31.2750   NaN        S  
+         14  female  14.0      0      0     350406   7.8542   NaN        S  
+\end{Verbatim}
+            
+    \hypertarget{systematic-indexing-with-loc-and-iloc}{%
+\subsubsection{\texorpdfstring{Systematic indexing with \texttt{loc} and
+\texttt{iloc}}{Systematic indexing with loc and iloc}}\label{systematic-indexing-with-loc-and-iloc}}
+
+When using \texttt{{[}{]}} like above, you can only select from one axis
+at once (rows or columns, not both). For more advanced indexing, you
+have some extra attributes:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{loc}: selection by label
+\item
+  \texttt{iloc}: selection by position
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bonnell, Miss. Elizabeth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 26.55
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bonnell, Miss. Elizabeth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Andersson, Mr. Anders Johan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:}                                 PassengerId  Survived  Pclass     Sex   Age  \textbackslash{}
+         Name                                                                          
+         Bonnell, Miss. Elizabeth                 12         1       1  female  58.0   
+         Saundercock, Mr. William Henry           13         0       3    male  20.0   
+         Andersson, Mr. Anders Johan              14         0       3    male  39.0   
+         
+                                         SibSp  Parch     Ticket    Fare Cabin Embarked  
+         Name                                                                            
+         Bonnell, Miss. Elizabeth            0      0     113783  26.550  C103        S  
+         Saundercock, Mr. William Henry      0      0  A/5. 2151   8.050   NaN        S  
+         Andersson, Mr. Anders Johan         1      5     347082  31.275   NaN        S  
+\end{Verbatim}
+            
+    Selecting by position with \texttt{iloc} works similar as indexing numpy
+arrays:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:}                                                     Survived  Pclass
+         Name                                                                
+         Braund, Mr. Owen Harris                                    0       3
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}         1       1
+\end{Verbatim}
+            
+    The different indexing methods can also be used to assign data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Braund, Mr. Owen Harris}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}                                                     PassengerId  Survived  \textbackslash{}
+         Name                                                                        
+         Braund, Mr. Owen Harris                                       1       100   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}            2         1   
+         Heikkinen, Miss. Laina                                        3         1   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)                  4         1   
+         {\ldots}                                                         {\ldots}       {\ldots}   
+         Graham, Miss. Margaret Edith                                888         1   
+         Johnston, Miss. Catherine Helen "Carrie"                    889         0   
+         Behr, Mr. Karl Howell                                       890         1   
+         Dooley, Mr. Patrick                                         891         0   
+         
+                                                             Pclass     Sex   Age  \textbackslash{}
+         Name                                                                       
+         Braund, Mr. Owen Harris                                  3    male  22.0   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}       1  female  38.0   
+         Heikkinen, Miss. Laina                                   3  female  26.0   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)             1  female  35.0   
+         {\ldots}                                                    {\ldots}     {\ldots}   {\ldots}   
+         Graham, Miss. Margaret Edith                             1  female  19.0   
+         Johnston, Miss. Catherine Helen "Carrie"                 3  female   NaN   
+         Behr, Mr. Karl Howell                                    1    male  26.0   
+         Dooley, Mr. Patrick                                      3    male  32.0   
+         
+                                                             SibSp  Parch  \textbackslash{}
+         Name                                                               
+         Braund, Mr. Owen Harris                                 1      0   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}      1      0   
+         Heikkinen, Miss. Laina                                  0      0   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)            1      0   
+         {\ldots}                                                   {\ldots}    {\ldots}   
+         Graham, Miss. Margaret Edith                            0      0   
+         Johnston, Miss. Catherine Helen "Carrie"                1      2   
+         Behr, Mr. Karl Howell                                   0      0   
+         Dooley, Mr. Patrick                                     0      0   
+         
+                                                                       Ticket     Fare  \textbackslash{}
+         Name                                                                            
+         Braund, Mr. Owen Harris                                    A/5 21171   7.2500   
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}          PC 17599  71.2833   
+         Heikkinen, Miss. Laina                              STON/O2. 3101282   7.9250   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)                  113803  53.1000   
+         {\ldots}                                                              {\ldots}      {\ldots}   
+         Graham, Miss. Margaret Edith                                  112053  30.0000   
+         Johnston, Miss. Catherine Helen "Carrie"                  W./C. 6607  23.4500   
+         Behr, Mr. Karl Howell                                         111369  30.0000   
+         Dooley, Mr. Patrick                                           370376   7.7500   
+         
+                                                            Cabin Embarked  
+         Name                                                               
+         Braund, Mr. Owen Harris                              NaN        S  
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}   C85        C  
+         Heikkinen, Miss. Laina                               NaN        S  
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)        C123        S  
+         {\ldots}                                                  {\ldots}      {\ldots}  
+         Graham, Miss. Margaret Edith                         B42        S  
+         Johnston, Miss. Catherine Helen "Carrie"             NaN        S  
+         Behr, Mr. Karl Howell                               C148        C  
+         Dooley, Mr. Patrick                                  NaN        Q  
+         
+         [891 rows x 11 columns]
+\end{Verbatim}
+            
+    \hypertarget{boolean-indexing-filtering}{%
+\subsubsection{Boolean indexing
+(filtering)}\label{boolean-indexing-filtering}}
+
+    Often, you want to select rows based on a certain condition. This can be
+done with `boolean indexing' (like a where clause in SQL) and comparable
+to numpy.
+
+The indexer (or boolean mask) should be 1-dimensional and the same
+length as the thing being indexed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} Name
+         Braund, Mr. Owen Harris                                False
+         Cumings, Mrs. John Bradley (Florence Briggs Thayer)     True
+         Heikkinen, Miss. Laina                                 False
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)            True
+                                                                {\ldots}  
+         Graham, Miss. Margaret Edith                           False
+         Johnston, Miss. Catherine Helen "Carrie"               False
+         Behr, Mr. Karl Howell                                  False
+         Dooley, Mr. Patrick                                    False
+         Name: Fare, Length: 891, dtype: bool
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:}                                                     PassengerId  Survived  \textbackslash{}
+         Name                                                                        
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}            2         1   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)                  4         1   
+         McCarthy, Mr. Timothy J                                       7         0   
+         Fortune, Mr. Charles Alexander                               28         0   
+         {\ldots}                                                         {\ldots}       {\ldots}   
+         Sage, Miss. Dorothy Edith "Dolly"                           864         0   
+         Roebling, Mr. Washington Augustus II                        868         0   
+         Beckwith, Mrs. Richard Leonard (Sallie Monypeny)            872         1   
+         Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)               880         1   
+         
+                                                             Pclass     Sex   Age  \textbackslash{}
+         Name                                                                       
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}       1  female  38.0   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)             1  female  35.0   
+         McCarthy, Mr. Timothy J                                  1    male  54.0   
+         Fortune, Mr. Charles Alexander                           1    male  19.0   
+         {\ldots}                                                    {\ldots}     {\ldots}   {\ldots}   
+         Sage, Miss. Dorothy Edith "Dolly"                        3  female   NaN   
+         Roebling, Mr. Washington Augustus II                     1    male  31.0   
+         Beckwith, Mrs. Richard Leonard (Sallie Monypeny)         1  female  47.0   
+         Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)            1  female  56.0   
+         
+                                                             SibSp  Parch    Ticket  \textbackslash{}
+         Name                                                                         
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}      1      0  PC 17599   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)            1      0    113803   
+         McCarthy, Mr. Timothy J                                 0      0     17463   
+         Fortune, Mr. Charles Alexander                          3      2     19950   
+         {\ldots}                                                   {\ldots}    {\ldots}       {\ldots}   
+         Sage, Miss. Dorothy Edith "Dolly"                       8      2  CA. 2343   
+         Roebling, Mr. Washington Augustus II                    0      0  PC 17590   
+         Beckwith, Mrs. Richard Leonard (Sallie Monypeny)        1      1     11751   
+         Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)           0      1     11767   
+         
+                                                                 Fare        Cabin  \textbackslash{}
+         Name                                                                        
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}   71.2833          C85   
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)         53.1000         C123   
+         McCarthy, Mr. Timothy J                              51.8625          E46   
+         Fortune, Mr. Charles Alexander                      263.0000  C23 C25 C27   
+         {\ldots}                                                      {\ldots}          {\ldots}   
+         Sage, Miss. Dorothy Edith "Dolly"                    69.5500          NaN   
+         Roebling, Mr. Washington Augustus II                 50.4958          A24   
+         Beckwith, Mrs. Richard Leonard (Sallie Monypeny)     52.5542          D35   
+         Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)        83.1583          C50   
+         
+                                                            Embarked  
+         Name                                                         
+         Cumings, Mrs. John Bradley (Florence Briggs Tha{\ldots}        C  
+         Futrelle, Mrs. Jacques Heath (Lily May Peel)              S  
+         McCarthy, Mr. Timothy J                                   S  
+         Fortune, Mr. Charles Alexander                            S  
+         {\ldots}                                                     {\ldots}  
+         Sage, Miss. Dorothy Edith "Dolly"                         S  
+         Roebling, Mr. Washington Augustus II                      S  
+         Beckwith, Mrs. Richard Leonard (Sallie Monypeny)          S  
+         Potter, Mrs. Thomas Jr (Lily Alexenia Wilson)             C  
+         
+         [160 rows x 11 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{titanic\PYZhy{}train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{the-group-by-operation}{%
+\section{The group-by operation}\label{the-group-by-operation}}
+
+    \hypertarget{some-theory-the-groupby-operation-split-apply-combine}{%
+\subsubsection{Some `theory': the groupby operation
+(split-apply-combine)}\label{some-theory-the-groupby-operation-split-apply-combine}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:}     data key
+         0      0   A
+         1      5   B
+         2     10   C
+         3      5   A
+         ..   {\ldots}  ..
+         5     15   C
+         6     10   A
+         7     15   B
+         8     20   C
+         
+         [9 rows x 2 columns]
+\end{Verbatim}
+            
+    \hypertarget{recap-aggregating-functions}{%
+\subsubsection{Recap: aggregating
+functions}\label{recap-aggregating-functions}}
+
+    When analyzing data, you often calculate summary statistics
+(aggregations like the mean, max, \ldots{}). As we have seen before, we
+can easily calculate such a statistic for a Series or column using one
+of the many available methods. For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} 90
+\end{Verbatim}
+            
+    However, in many cases your data has certain groups in it, and in that
+case, you may want to calculate this statistic for each of the groups.
+
+For example, in the above dataframe \texttt{df}, there is a column `key'
+which has three possible values: `A', `B' and `C'. When we want to
+calculate the sum for each of those groups, we could do the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A 15
+B 30
+C 45
+
+    \end{Verbatim}
+
+    This becomes very verbose when having multiple groups. You could make
+the above a bit easier by looping over the different values, but still,
+it is not very convenient to work with.
+
+What we did above, applying a function on different groups, is a
+``groupby operation'', and pandas provides some convenient functionality
+for this.
+
+    \hypertarget{groupby-applying-functions-per-group}{%
+\subsubsection{Groupby: applying functions per
+group}\label{groupby-applying-functions-per-group}}
+
+    The ``group by'' concept: we want to \textbf{apply the same function on
+subsets of your dataframe, based on some key to split the dataframe in
+subsets}
+
+This operation is also referred to as the ``split-apply-combine''
+operation, involving the following steps:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Splitting} the data into groups based on some criteria
+\item
+  \textbf{Applying} a function to each group independently
+\item
+  \textbf{Combining} the results into a data structure
+\end{itemize}
+
+Similar to SQL \texttt{GROUP\ BY}
+
+    Instead of doing the manual filtering as above
+
+\begin{verbatim}
+df[df['key'] == "A"].sum()
+df[df['key'] == "B"].sum()
+...
+\end{verbatim}
+
+pandas provides the \texttt{groupby} method to do exactly this:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x10e56c4e0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_91_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{aggregate}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{)}  \PY{c+c1}{\PYZsh{} \PYZsq{}sum\PYZsq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:}      data
+         key      
+         A      15
+         B      30
+         C      45
+\end{Verbatim}
+            
+    And many more methods are available.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} key
+         A    15
+         B    30
+         C    45
+         Name: data, dtype: int64
+\end{Verbatim}
+            
+    \hypertarget{exercises}{%
+\section{EXERCISES}\label{exercises}}
+
+    EXERCISE:
+
+In the Titanic dataset- What is the maximum Fare that was paid? And the
+median?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}553}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{titanic\PYZhy{}train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{interactiveshell} \PY{k}{import} \PY{n}{InteractiveShell}
+          \PY{n}{InteractiveShell}\PY{o}{.}\PY{n}{ast\PYZus{}node\PYZus{}interactivity} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+512.3292
+14.4542
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Calculate the average survival ratio for all passengers without using
+the mean function (note: the `Survived' column indicates whether someone
+survived (1) or not (0)).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}554}]:} \PY{c+c1}{\PYZsh{}df[\PYZsq{}Survived\PYZsq{}].aggregate(lambda x: x.sum() / len(x))}
+          \PY{c+c1}{\PYZsh{}or}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.3838383838383838
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Plot the age distribution of the titanic passengers
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}555}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}555}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1151c46a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_101_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    EXERCISE:
+
+Based on the titanic data set, select all rows for male passengers and
+calculate the mean age of those passengers. Do the same for the female
+passengers
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}556}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+30.72664459161148
+27.915708812260537
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Based on the titanic data set, how many passengers older than 70 were on
+the Titanic?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}557}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{70}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+5
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Calculate the average age for each sex again, but now using groupby.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}558}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+              Age
+Sex              
+female  27.915709
+male    30.726645
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Calculate the average survival ratio for all passengers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}559}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.3838383838383838
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+What is the difference in the survival ratio between the sexes?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}560}]:} \PY{c+c1}{\PYZsh{} ASK ABOUT THIS Q}
+          
+          \PY{c+c1}{\PYZsh{}df.groupby(\PYZsq{}Sex\PYZsq{})[[\PYZsq{}Survived\PYZsq{}]].aggregate(lambda x: x.sum() / len(x))}
+          \PY{c+c1}{\PYZsh{}df[df[\PYZsq{}Sex\PYZsq{}]==\PYZsq{}female\PYZsq{}][\PYZsq{}Survived\PYZsq{}].mean()/df[df[\PYZsq{}Sex\PYZsq{}]==\PYZsq{}male\PYZsq{}][\PYZsq{}Survived\PYZsq{}].mean()}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.5531300709799203
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Calculate this survival ratio for all male passengers younger that 25
+that belongs to Pclass 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}561}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{25}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.4166666666666667
+
+    \end{Verbatim}
+
+    EXERCISE:
+
+Or how does it differ between the different classes? Make a bar plot
+visualizing the survival ratio for the 3 Pclass classes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}562}]:} \PY{c+c1}{\PYZsh{}df.groupby(\PYZsq{}Pclass\PYZsq{})[\PYZsq{}Survived\PYZsq{}].aggregate(lambda x: x.sum() / len(x)).plot(kind=\PYZsq{}bar\PYZsq{})}
+          \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}562}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1155025f8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_115_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    EXERCISE:
+
+Make a bar plot to visualize the average Fare payed by people depending
+on their age.use \texttt{pd.cut} to divide the age column.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}563}]:} \PY{n}{binedges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{binlabels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0\PYZhy{}10}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{11\PYZhy{}20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{21\PYZhy{}30}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{31\PYZhy{}40}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{41\PYZhy{}50}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{51\PYZhy{}60}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{61\PYZhy{}70}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{71\PYZhy{}80}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{n}{binedges} \PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{binlabels}\PY{p}{)}
+          \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}563}]:} [Text(0,0.5,'Average Fare'), Text(0.5,0,'Age categories')]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_117_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    EXERCISE:
+
+Add another column to the dataframe and call it `Rank'. the vaules of
+this column will be the rank of the `Fare' according to the `Pclass'
+column. e.g if one had the maximal Fare in Pclass 1 he gets 1 (same for
+the maximal of Pclass 2) and so on
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}564}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    EXERCISE:
+
+Look at the Cabin columns and turn it into another boolean column (1/0)
+indicates if the passenger has a cabin or not
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}565}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cabin\PYZus{}bool}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cabin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{notnull}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    EXERCISE:
+
+Let's look at the names of the passengers. You need to create column
+`Title' by extracting the title of the passenger with 5 possible values:
+Mrs, Mr, Miss , Master and other, when other refers to rest of the
+titles.
+
+Hint : you can use \texttt{Regex} for the extracting step
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}566}]:} \PY{k+kn}{import} \PY{n+nn}{re}
+          
+          \PY{n}{regex} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(?:\PYZdl{}|\PYZca{}| )(Mrs|Mr|Miss|Master|Mrs.|Mr.|Miss.|Master.|mrs|mr|miss|master|mrs.|mr.|miss.|master.)(?:\PYZdl{}|\PYZca{}| )}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{name\PYZus{}list} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{title} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{n}{name\PYZus{}list}\PY{p}{:}
+              \PY{n}{t}\PY{o}{=}\PY{n}{re}\PY{o}{.}\PY{n}{findall}\PY{p}{(}\PY{n}{regex}\PY{p}{,} \PY{n}{name}\PY{p}{)}
+              \PY{k}{if} \PY{o+ow}{not} \PY{n}{t}\PY{p}{:}
+                  \PY{n}{title}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{other}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{k}{continue}
+              \PY{k}{for} \PY{n}{ch} \PY{o+ow}{in} \PY{n}{t}\PY{p}{:}
+                  \PY{n}{new\PYZus{}t} \PY{o}{=} \PY{n}{ch}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{title}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}t}\PY{p}{)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{title}
+\end{Verbatim}
+
+
+    EXERCISE:
+
+fill the Null values of the Age colum with considerable value and divide
+the Age and the Fare columns to 3 bins. Finally, drop the original
+columns
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}567}]:} \PY{c+c1}{\PYZsh{}fill the null values of the Age column with considerable(?) value}
+          \PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} \PY{c+c1}{\PYZsh{}NOT CLEAR WHAT IS A CONSIDERABLE VALUE}
+          
+          \PY{c+c1}{\PYZsh{}divide the age and fare columns to 3 bins}
+          \PY{c+c1}{\PYZsh{}age}
+          \PY{n}{binedges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{binlabels} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age\PYZus{}3\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Age}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{n}{binedges} \PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{binlabels}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}fare}
+          \PY{n}{binedges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Fare}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{Fare}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+          \PY{n}{binlabels} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fare\PYZus{}3\PYZus{}bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{cut}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Fare}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{n}{binedges} \PY{p}{,}\PY{n}{labels}\PY{o}{=}\PY{n}{binlabels}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}drop the original columns}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{now-lets-create-our-own-dataset}{%
+\section{Now let's create our own
+dataset}\label{now-lets-create-our-own-dataset}}
+
+    EXERCISE:
+
+\begin{verbatim}
+Genrate a DataFrame with the following: 
+\end{verbatim}
+
+200 rows, 5 columns - the first one must be generated out of this list :
+cat,dog,horse,pig,None (the python equivallent to Null in C++) and with
+uniform distribution.The rest of the columns need to be generated out of
+standard normal distribution The columns names are : key,A,B,C,D
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}568}]:} \PY{c+c1}{\PYZsh{} create an empty df with column names: key, A, B, C, D}
+          \PY{n}{col\PYZus{}names} \PY{o}{=}  \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{numRows} \PY{o}{=} \PY{l+m+mi}{200}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{n+nb}{range}\PY{p}{(}\PY{n}{numRows}\PY{p}{)}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{n}{col\PYZus{}names}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} fill the first column with \PYZhy{} cat, dog, horse, pig, None with uniform distribution. }
+          \PY{n}{animals} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{k+kc}{None}\PY{p}{]}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{animals}\PY{p}{,} \PY{n}{numRows}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} fill the rest of the columns out of standard normal distribution. }
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:} 
+               \PY{n}{df}\PY{p}{[}\PY{n}{col\PYZus{}names}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{standard\PYZus{}normal}\PY{p}{(}\PY{n}{numRows}\PY{p}{)}
+\end{Verbatim}
+
+
+    EXERCISE:
+
+Now that we have some null values we need to fill them. replace it with
+the last valid value of the sorted Dataframe according to column C
+(ascending). Finally reset the index
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}569}]:} \PY{c+c1}{\PYZsh{} replace the None values with the last valid value (in column key?) of the sorted df according to column C}
+          \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{rep\PYZus{}animal} \PY{o}{=} \PY{k+kc}{None}
+          \PY{k}{while} \PY{n}{rep\PYZus{}animal} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+              \PY{n}{rep\PYZus{}animal} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} df[\PYZsq{}key\PYZsq{}].replace(None, rep\PYZus{}animal, inplace=True)}
+          \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{n}{rep\PYZus{}animal}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} reset the index }
+          \PY{c+c1}{\PYZsh{} df.reset\PYZus{}index(drop=True)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}569}]:}      index    key         A         B         C         D
+          0        3    pig  1.232128 -0.315534 -2.314247 -1.073575
+          1      130    dog  0.408602  0.150002 -2.282880  0.968607
+          2       86    dog  0.043166  0.225721 -2.242299 -0.660823
+          3      185    dog -0.581559  0.738879 -2.184273  1.336626
+          ..     {\ldots}    {\ldots}       {\ldots}       {\ldots}       {\ldots}       {\ldots}
+          196     32    pig -0.717012  0.126499  2.148507  0.471112
+          197    146    dog  1.340235 -0.859945  2.356775  0.408570
+          198    106    dog -0.770709 -2.318966  2.695508 -2.826732
+          199     21  horse -0.725280  1.414844  3.198812 -0.093785
+          
+          [200 rows x 6 columns]
+\end{Verbatim}
+            
+    EXERCISE:
+
+Extract for each value in the `key' column the row with the minimal
+value in `A' column and return the `D' column value of the row.
+
+Do it again, this time to the minimal of columns `B' AND `C'.
+
+Finally, concatenate it all to new DataFrame (df2) with the following
+columns: `key',`A\_MINIMAL',`B\_MINIMAL',`C\_MINIMAL' (you should have
+totally 4 rows, one for each key)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}627}]:} \PY{c+c1}{\PYZsh{} for each column in \PYZsq{}key\PYZsq{} extract the row+D\PYZhy{}column with minimal value in A}
+          \PY{n}{a} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} with minimal value in B}
+          \PY{n}{b} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} with minimal value in C}
+          \PY{n}{c} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} new df2 (concatinate all)}
+          \PY{n}{col\PYZus{}names} \PY{o}{=}  \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{numRows} \PY{o}{=} \PY{l+m+mi}{4}
+          \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{col\PYZus{}names}\PY{p}{)}
+          \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{o}{.}\PY{n}{key}\PY{o}{.}\PY{n}{values}
+          \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{a}\PY{o}{.}\PY{n}{D}\PY{o}{.}\PY{n}{values}
+          \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{b}\PY{o}{.}\PY{n}{D}\PY{o}{.}\PY{n}{values}
+          \PY{n}{df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZus{}MINIMAL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{D}\PY{o}{.}\PY{n}{values}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     key  A\_MINIMAL  B\_MINIMAL  C\_MINIMAL
+0    cat  -1.396084  -0.805351  -1.495014
+1    dog  -1.773175  -2.826732   0.968607
+2  horse   0.681624   0.815851   0.959631
+3    pig  -0.857030  -1.077159  -1.073575
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
