@@ -3,7 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb.txt" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HM0/HW0.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.bbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.blg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.synctex.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_1_idit_b.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/Q3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/air_resources_management/library.bib" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,7 +50,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="810" />
@@ -58,17 +67,6 @@
             <path>
               <item name="Courses" type="b2602c69:ProjectViewProjectNode" />
               <item name="Courses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Courses" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Courses" type="462c0819:PsiDirectoryNode" />
-              <item name="statistical_ML" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Courses" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Courses" type="462c0819:PsiDirectoryNode" />
-              <item name="statistical_ML" type="462c0819:PsiDirectoryNode" />
-              <item name="HM0" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -129,8 +127,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="810" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="810" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -140,7 +137,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" weight="0.17146975" />
       <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18948127" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24855907" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />
