@@ -1,0 +1,832 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{q2---linear-regression}{%
+\section{Q2 - Linear Regression}\label{q2---linear-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}347}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          
+          \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{interactiveshell} \PY{k}{import} \PY{n}{InteractiveShell}
+          \PY{n}{InteractiveShell}\PY{o}{.}\PY{n}{ast\PYZus{}node\PYZus{}interactivity} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{all}\PY{l+s+s2}{\PYZdq{}}
+          \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}retina\PYZsq{}
+\end{Verbatim}
+
+
+    \hypertarget{a}{%
+\subsection{a}\label{a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}348}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{parkinsons\PYZus{}updrs\PYZus{}data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}349}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}349}]:}    subject.ID  age  sex  test\_time  motor\_UPDRS  total\_UPDRS  Jitter.Per  \textbackslash{}
+          0           1   72    0     5.6431       28.199       34.398     0.00662   
+          1           1   72    0    12.6660       28.447       34.894     0.00300   
+          2           1   72    0    19.6810       28.695       35.389     0.00481   
+          3           1   72    0    25.6470       28.905       35.810     0.00528   
+          4           1   72    0    33.6420       29.187       36.375     0.00335   
+          
+             Jitter.Abs  Jitter.RAP  Jitter.PPQ5   {\ldots}     Shimmer.dB  Shimmer.APQ3  \textbackslash{}
+          0    0.000034     0.00401      0.00317   {\ldots}          0.230       0.01438   
+          1    0.000017     0.00132      0.00150   {\ldots}          0.179       0.00994   
+          2    0.000025     0.00205      0.00208   {\ldots}          0.181       0.00734   
+          3    0.000027     0.00191      0.00264   {\ldots}          0.327       0.01106   
+          4    0.000020     0.00093      0.00130   {\ldots}          0.176       0.00679   
+          
+             Shimmer.APQ5  Shimmer.APQ11  Shimmer.DDA       NHR     HNR     RPDE  \textbackslash{}
+          0       0.01309        0.01662      0.04314  0.014290  21.640  0.41888   
+          1       0.01072        0.01689      0.02982  0.011112  27.183  0.43493   
+          2       0.00844        0.01458      0.02202  0.020220  23.047  0.46222   
+          3       0.01265        0.01963      0.03317  0.027837  24.445  0.48730   
+          4       0.00929        0.01819      0.02036  0.011625  26.126  0.47188   
+          
+                 DFA      PPE  
+          0  0.54842  0.16006  
+          1  0.56477  0.10810  
+          2  0.54405  0.21014  
+          3  0.57794  0.33277  
+          4  0.56122  0.19361  
+          
+          [5 rows x 22 columns]
+\end{Verbatim}
+            
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}349}]:} Index(['subject.ID', 'age', 'sex', 'test\_time', 'motor\_UPDRS', 'total\_UPDRS',
+                 'Jitter.Per', 'Jitter.Abs', 'Jitter.RAP', 'Jitter.PPQ5', 'Jitter.DDP',
+                 'Shimmer', 'Shimmer.dB', 'Shimmer.APQ3', 'Shimmer.APQ5',
+                 'Shimmer.APQ11', 'Shimmer.DDA', 'NHR', 'HNR', 'RPDE', 'DFA', 'PPE'],
+                dtype='object')
+\end{Verbatim}
+            
+    \hypertarget{b}{%
+\subsection{b}\label{b}}
+
+    \textbf{NOTES TO MYSELF}
+
+The data contains data for 42 patients (subjects). For these 42 patients
+we have 5,875 voice recordings.
+
+\textbf{general data:} subject.ID - Integer that uniquely identifies
+each subject age - Subject age sex - Subject gender `0' - male, `1' -
+female test\_time - Time since recruitment into the trial. The integer
+part is the number of days since recruitment.
+
+\textbf{what we want to predict:} motor\_UPDRS - Clinician's motor UPDRS
+score, linearly interpolated total\_UPDRS - Clinician's total UPDRS
+score, linearly interpolated
+
+\textbf{measuremets (16 biomedical voice measures):}
+Jitter.Per,Jitter.Abs,Jitter.RAP,Jitter.PPQ5,Jitter.DDP - Several
+measures of variation in fundamental frequency
+Shimmer,Shimmer.dB,Shimmer.APQ3,Shimmer.APQ5,Shimmer.APQ11,Shimmer.DDA -
+Several measures of variation in amplitude NHR,HNR - Two measures of
+ratio of noise to tonal components in the voice RPDE - A nonlinear
+dynamical complexity measure DFA - Signal fractal scaling exponent PPE -
+A nonlinear measure of fundamental frequency variation 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}350}]:} \PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}350}]:}         subject.ID          age          sex    test\_time  motor\_UPDRS  \textbackslash{}
+          count  5875.000000  5875.000000  5875.000000  5875.000000  5875.000000   
+          mean     21.494128    64.804936     0.317787    92.863722    21.296229   
+          std      12.372279     8.821524     0.465656    53.445602     8.129282   
+          min       1.000000    36.000000     0.000000    -4.262500     5.037700   
+          25\%      10.000000    58.000000     0.000000    46.847500    15.000000   
+          50\%      22.000000    65.000000     0.000000    91.523000    20.871000   
+          75\%      33.000000    72.000000     1.000000   138.445000    27.596500   
+          max      42.000000    85.000000     1.000000   215.490000    39.511000   
+          
+                 total\_UPDRS   Jitter.Per   Jitter.Abs   Jitter.RAP  Jitter.PPQ5  \textbackslash{}
+          count  5875.000000  5875.000000  5875.000000  5875.000000  5875.000000   
+          mean     29.018942     0.006154     0.000044     0.002987     0.003277   
+          std      10.700283     0.005624     0.000036     0.003124     0.003732   
+          min       7.000000     0.000830     0.000002     0.000330     0.000430   
+          25\%      21.371000     0.003580     0.000022     0.001580     0.001820   
+          50\%      27.576000     0.004900     0.000035     0.002250     0.002490   
+          75\%      36.399000     0.006800     0.000053     0.003290     0.003460   
+          max      54.992000     0.099990     0.000446     0.057540     0.069560   
+          
+                    {\ldots}        Shimmer.dB  Shimmer.APQ3  Shimmer.APQ5  Shimmer.APQ11  \textbackslash{}
+          count     {\ldots}       5875.000000   5875.000000   5875.000000    5875.000000   
+          mean      {\ldots}          0.310960      0.017156      0.020144       0.027481   
+          std       {\ldots}          0.230254      0.013237      0.016664       0.019986   
+          min       {\ldots}          0.026000      0.001610      0.001940       0.002490   
+          25\%       {\ldots}          0.175000      0.009280      0.010790       0.015665   
+          50\%       {\ldots}          0.253000      0.013700      0.015940       0.022710   
+          75\%       {\ldots}          0.365000      0.020575      0.023755       0.032715   
+          max       {\ldots}          2.107000      0.162670      0.167020       0.275460   
+          
+                 Shimmer.DDA          NHR          HNR         RPDE          DFA  \textbackslash{}
+          count  5875.000000  5875.000000  5875.000000  5875.000000  5875.000000   
+          mean      0.051467     0.032120    21.679495     0.541473     0.653240   
+          std       0.039711     0.059692     4.291096     0.100986     0.070902   
+          min       0.004840     0.000286     1.659000     0.151020     0.514040   
+          25\%       0.027830     0.010955    19.406000     0.469785     0.596180   
+          50\%       0.041110     0.018448    21.920000     0.542250     0.643600   
+          75\%       0.061735     0.031463    24.444000     0.614045     0.711335   
+          max       0.488020     0.748260    37.875000     0.966080     0.865600   
+          
+                         PPE  
+          count  5875.000000  
+          mean      0.219589  
+          std       0.091498  
+          min       0.021983  
+          25\%       0.156340  
+          50\%       0.205500  
+          75\%       0.264490  
+          max       0.731730  
+          
+          [8 rows x 22 columns]
+\end{Verbatim}
+            
+    \textbf{age of subjects} - the mean age of the subjects is 64.8 years
+old, with a standard deviation of 8.8 years. The youngest subject is 36
+years old while the oldest is 85.
+
+\textbf{gender of subjects} - since 0 represents a male and 1 - a
+female, we can see by the ``mean sex'', that about 32\% of the subjects
+are females, meaning the majuraty (68\%) are males.
+
+    \hypertarget{c}{%
+\subsection{c}\label{c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}351}]:} \PY{n}{df\PYZus{}6} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jitter.Per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shimmer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{motor\PYZus{}UPDRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}352}]:} \PY{n}{scatter\PYZus{}plot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{plotting}\PY{o}{.}\PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{df\PYZus{}6}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{,}
+                                                    \PY{n}{ax}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{grid}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                    \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{density\PYZus{}kwds}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} 
+                                                    \PY{n}{hist\PYZus{}kwds}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{edgecolor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,}
+                                                    \PY{n}{range\PYZus{}padding}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{d}{%
+\subsection{d}\label{d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}353}]:} \PY{k}{def} \PY{n+nf}{leastSquares}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{}X and y are numpy arrays }
+              
+              \PY{n}{estimators} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                               \PY{n}{np}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{estimators}
+\end{Verbatim}
+
+
+    \hypertarget{e}{%
+\subsection{e}\label{e}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}354}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+          
+          \PY{n}{X} \PY{o}{=} \PY{n}{df\PYZus{}6}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jitter.Per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shimmer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NHR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PPE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          \PY{n}{y} \PY{o}{=} \PY{n}{df\PYZus{}6}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{motor\PYZus{}UPDRS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+          \PY{n}{X2} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} np.shape(X)}
+          \PY{c+c1}{\PYZsh{} np.shape(y)}
+          
+          \PY{n}{w} \PY{o}{=} \PY{n}{leastSquares}\PY{p}{(}\PY{n}{X2}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{f}{%
+\subsection{f}\label{f}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}355}]:} \PY{c+c1}{\PYZsh{} python\PYZsq{}s linear regression (sklearn)}
+          \PY{c+c1}{\PYZsh{} from sklearn import linear\PYZus{}model}
+          \PY{c+c1}{\PYZsh{} import statsmodels.api as sm}
+          \PY{c+c1}{\PYZsh{} X2 = sm.add\PYZus{}constant(X)}
+          \PY{c+c1}{\PYZsh{} reg = linear\PYZus{}model.LinearRegression()}
+          \PY{c+c1}{\PYZsh{} reg2 = reg.fit(X2, y)                                      }
+          \PY{c+c1}{\PYZsh{} print(reg2.coef\PYZus{})}
+          
+          \PY{c+c1}{\PYZsh{} python\PYZsq{}s linear regression (statsmodels)}
+          \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+          
+          \PY{n}{X2} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{reg} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{OLS}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{X2}\PY{p}{)}
+          \PY{n}{reg2} \PY{o}{=} \PY{n}{reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Yes, I got the same values. The following table summarizes the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}356}]:} \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{My\PYZus{}model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{w}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Python\PYZus{}model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{reg2}\PY{o}{.}\PY{n}{params}\PY{p}{\PYZcb{}}
+          \PY{n}{table} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} The following table compares both models\PYZsq{} estimators}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{table}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     My\_model  Python\_model
+0    3.445982      3.445982
+1    0.236592      0.236592
+2   -0.160868     -0.160868
+3 -101.125995   -101.125995
+4   -4.648934     -4.648934
+5    7.366135      7.366135
+6   14.176249     14.176249
+
+    \end{Verbatim}
+
+    \hypertarget{g}{%
+\subsection{g}\label{g}}
+
+    We can use a t-test, provided by the the linear regression model from
+statsmodels:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}357}]:} \PY{c+c1}{\PYZsh{} sig\PYZus{}level = 0.01}
+          \PY{n}{sig\PYZus{}level} \PY{o}{=} \PY{l+m+mf}{0.01}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{reg2}\PY{o}{.}\PY{n}{pvalues}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{reg2}\PY{o}{.}\PY{n}{pvalues}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{sig\PYZus{}level}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rejecting the null hypothesis with 0.01 significance level of 0.01 for parameter: }\PY{l+s+s2}{\PYZdq{}} 
+                        \PY{o}{+} \PY{n}{df\PYZus{}6}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} sig\PYZus{}level = 0.001}
+          \PY{n}{sig\PYZus{}level} \PY{o}{=} \PY{l+m+mf}{0.001}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{reg2}\PY{o}{.}\PY{n}{pvalues}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+              \PY{k}{if} \PY{p}{(}\PY{n}{reg2}\PY{o}{.}\PY{n}{pvalues}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{n}{sig\PYZus{}level}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rejecting the null hypothesis with 0.01 significance level of 0.001 for parameter: }\PY{l+s+s2}{\PYZdq{}} 
+                        \PY{o}{+} \PY{n}{df\PYZus{}6}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                         
+          \PY{c+c1}{\PYZsh{} reg2.summary()}
+          \PY{c+c1}{\PYZsh{} reg2.params}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Rejecting the null hypothesis with 0.01 significance level of 0.01 for parameter: age
+Rejecting the null hypothesis with 0.01 significance level of 0.01 for parameter: Jitter.Per
+Rejecting the null hypothesis with 0.01 significance level of 0.01 for parameter: PPE
+Rejecting the null hypothesis with 0.01 significance level of 0.001 for parameter: age
+Rejecting the null hypothesis with 0.01 significance level of 0.001 for parameter: PPE
+
+    \end{Verbatim}
+
+    \hypertarget{q3---logistic-regression}{%
+\section{Q3 - Logistic Regression}\label{q3---logistic-regression}}
+
+    \hypertarget{a}{%
+\subsection{a}\label{a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}358}]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Math}
+          \PY{n}{Math}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{l(w) = argmax\PYZus{}w }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sum\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i=1\PYZcb{}\PYZca{}}\PY{l+s+si}{\PYZob{}m\PYZcb{}}\PY{l+s+s1}{ log(P(y\PYZus{}i|x\PYZus{}i)) = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{argmax\PYZus{}w }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sum\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i=1\PYZcb{}\PYZca{}}\PY{l+s+si}{\PYZob{}m\PYZcb{}}\PY{l+s+s1}{ log(}\PY{l+s+se}{\PYZbs{}f}\PY{l+s+s1}{rac}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1+exp(\PYZhy{}y\PYZus{}i w\PYZca{}T x\PYZus{}i) \PYZcb{})}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}358}]:}
+    
+    $$l(w) = argmax_w \sum_{i=1}^{m} log(P(y_i|x_i)) = argmax_w \sum_{i=1}^{m} log(rac{1}{1+exp(-y_i w^T x_i) })$$
+
+    
+
+    \hypertarget{b}{%
+\subsection{b}\label{b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}359}]:} \PY{n}{Math}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{argmax\PYZus{}w }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sum\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i=1\PYZcb{}\PYZca{}}\PY{l+s+si}{\PYZob{}m\PYZcb{}}\PY{l+s+s1}{ log(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{frac}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{1+exp(\PYZhy{}y\PYZus{}i w\PYZca{}T x\PYZus{}i) \PYZcb{}) = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{argmax\PYZus{}w }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sum\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i=1\PYZcb{}\PYZca{}}\PY{l+s+si}{\PYZob{}m\PYZcb{}}\PY{l+s+s1}{ log(1) \PYZhy{} log(1+exp(\PYZhy{}y\PYZus{}i w\PYZca{}T x\PYZus{}i)) = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+}
+               \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{argmin\PYZus{}w }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sum\PYZus{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{i=1\PYZcb{}\PYZca{}}\PY{l+s+si}{\PYZob{}m\PYZcb{}}\PY{l+s+s1}{ log(1+exp(\PYZhy{}y\PYZus{}i w\PYZca{}T x\PYZus{}i))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}359}]:}
+    
+    $$argmax_w \sum_{i=1}^{m} log(\frac{1}{1+exp(-y_i w^T x_i) }) = argmax_w \sum_{i=1}^{m} log(1) - log(1+exp(-y_i w^T x_i)) = argmin_w \sum_{i=1}^{m} log(1+exp(-y_i w^T x_i))$$
+
+    
+
+    \hypertarget{q4---multiple-logistic-regression}{%
+\section{Q4 - Multiple Logistic
+Regression}\label{q4---multiple-logistic-regression}}
+
+    \hypertarget{a}{%
+\subsection{a}\label{a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}360}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}
+          \PY{n}{iris} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{load\PYZus{}iris}\PY{p}{(}\PY{p}{)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{iris}\PY{o}{.}\PY{n}{data}
+          \PY{n}{y} \PY{o}{=} \PY{n}{iris}\PY{o}{.}\PY{n}{target}
+\end{Verbatim}
+
+
+    \hypertarget{b}{%
+\subsection{b}\label{b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}361}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{c}{%
+\subsection{c}\label{c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}362}]:} \PY{c+c1}{\PYZsh{} change data}
+          \PY{k+kn}{from} \PY{n+nn}{copy} \PY{k}{import} \PY{n}{copy}\PY{p}{,} \PY{n}{deepcopy}
+          
+          \PY{c+c1}{\PYZsh{} 1}
+          \PY{n}{y1} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} 1}
+          \PY{n}{y1}\PY{p}{[}\PY{n}{y1} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{c+c1}{\PYZsh{} turn vers(1) ad virg(2) to \PYZhy{}1}
+          \PY{n}{y1}\PY{p}{[}\PY{n}{y1} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          \PY{n}{y1}\PY{p}{[}\PY{n}{y1} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{}turn setosa (0) to 1}
+          
+          \PY{c+c1}{\PYZsh{} train a logistic regression classfier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{n}{clf\PYZus{}1} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}instead of adding a constat to X use fit\PYZus{}intercept}
+\end{Verbatim}
+
+
+    \hypertarget{d}{%
+\subsection{d}\label{d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}363}]:} \PY{c+c1}{\PYZsh{} 2}
+          \PY{n}{y2} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{n}{y2}\PY{p}{[}\PY{n}{y2} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          \PY{n}{y2}\PY{p}{[}\PY{n}{y2} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          \PY{c+c1}{\PYZsh{} y2[y2 == 1] = 1 }
+          
+          \PY{c+c1}{\PYZsh{} train a logistic regression classfier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{n}{clf\PYZus{}2} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}364}]:} \PY{c+c1}{\PYZsh{} 3 }
+          \PY{n}{y3} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+          
+          \PY{n}{y3}\PY{p}{[}\PY{n}{y3} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          \PY{n}{y3}\PY{p}{[}\PY{n}{y3} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+          \PY{n}{y3}\PY{p}{[}\PY{n}{y3} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+          
+          \PY{c+c1}{\PYZsh{} train a logistic regression classfier}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          \PY{n}{clf\PYZus{}3} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{e}{%
+\subsection{e}\label{e}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}365}]:} \PY{k}{def} \PY{n+nf}{one\PYZus{}versus\PYZus{}rest}\PY{p}{(}\PY{n}{clf\PYZus{}1}\PY{p}{,}\PY{n}{clf\PYZus{}2}\PY{p}{,}\PY{n}{clf\PYZus{}3}\PY{p}{,}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} the order of the classes classified we can get from clf\PYZus{}1.classes\PYZus{}}
+              \PY{n}{pr\PYZus{}1} \PY{o}{=} \PY{n}{clf\PYZus{}1}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)} 
+              \PY{n}{pr\PYZus{}2} \PY{o}{=} \PY{n}{clf\PYZus{}2}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+              \PY{n}{pr\PYZus{}3} \PY{o}{=} \PY{n}{clf\PYZus{}3}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+              \PY{n}{max\PYZus{}prob} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{pr\PYZus{}1}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{pr\PYZus{}2}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{pr\PYZus{}3}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+              \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{max\PYZus{}prob}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{k}{return} \PY{n}{y\PYZus{}predicted}
+              
+\end{Verbatim}
+
+
+    \hypertarget{f}{%
+\subsection{f}\label{f}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}366}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+          
+          \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{one\PYZus{}versus\PYZus{}rest}\PY{p}{(}\PY{n}{clf\PYZus{}1}\PY{p}{,}\PY{n}{clf\PYZus{}2}\PY{p}{,}\PY{n}{clf\PYZus{}3}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{)}
+          \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[11  0  0]
+ [ 0 12  4]
+ [ 0  0 18]]
+
+    \end{Verbatim}
+
+    \hypertarget{g}{%
+\subsection{g}\label{g}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}367}]:} \PY{c+c1}{\PYZsh{} create a data frame from the test data }
+          \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                  \PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{:} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                  \PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{:}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+                  \PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}\PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}true}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{y\PYZus{}true}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{y\PYZus{}pred}\PY{p}{\PYZcb{}}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+          
+          
+          \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}367}]:}    petal length (cm)  petal width (cm)  sepal length (cm)  sepal width (cm)  \textbackslash{}
+          0                4.2               1.2                5.7               3.0   
+          1                1.5               0.1                4.9               3.1   
+          2                4.9               1.8                6.1               3.0   
+          3                5.7               2.3                6.9               3.2   
+          4                1.9               0.2                4.8               3.4   
+          5                1.4               0.2                5.2               3.4   
+          6                4.5               1.5                5.4               3.0   
+          7                4.5               1.5                6.2               2.2   
+          8                1.3               0.2                4.4               3.0   
+          9                4.9               1.8                6.3               2.7   
+          
+             y\_pred  y\_true  
+          0       1       1  
+          1       0       0  
+          2       2       2  
+          3       2       2  
+          4       0       0  
+          5       0       0  
+          6       2       1  
+          7       1       1  
+          8       0       0  
+          9       2       2  
+\end{Verbatim}
+            
+    we can see that all mistakes are betweenn class 1 and class 2 (plot all
+to see all). if we look at the means of the properties we can see that
+class 1 and 2 are indeed the most similar.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}368}]:} \PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}true}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}368}]:}         petal length (cm)  petal width (cm)  sepal length (cm)  \textbackslash{}
+          y\_true                                                           
+          0                1.545455          0.245455           5.018182   
+          1                4.143750          1.287500           5.756250   
+          2                5.377778          2.022222           6.450000   
+          
+                  sepal width (cm)  y\_pred  
+          y\_true                            
+          0               3.436364    0.00  
+          1               2.743750    1.25  
+          2               2.938889    2.00  
+\end{Verbatim}
+            
+    Lets plot for example the scatter of sepal width VS. sepal lenngth:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}369}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+          
+          \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}true}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{y\PYZus{}true}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{circle} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{4.5}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}artist}\PY{p}{(}\PY{n}{circle}\PY{p}{)}
+          
+          \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y\PYZus{}pred}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{y\PYZus{}predicted}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{iris}\PY{o}{.}\PY{n}{feature\PYZus{}names}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{labelpad}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+          
+          \PY{n}{circle} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{4.5}\PY{p}{,} \PY{l+m+mf}{1.5}\PY{p}{)}\PY{p}{,} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}artist}\PY{p}{(}\PY{n}{circle}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    we can see that group 0 (purple) is far from the other two groups - 1
+and 2. and group 1 and 2 have a ``common area'' of similar length and
+width
+
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
