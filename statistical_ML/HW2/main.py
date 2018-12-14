@@ -43,9 +43,20 @@ def ex3b(model, x_train, y_train, x_test, y_test):
     test_error = 1-accuracy_score(y_test, y_pred_test)
     return y_pred_train,y_pred_test,train_error,test_error
 
-def ex4(data):
-    pass
-
+def ex4(data):  # x is a matrix of size mXn, m nunmber of samples, n number of features. y is a 1D array
+    np.set_printoptions(precision=10)
+    X = data['X']
+    y = data['y']
+    w_t = np.zeros(X.shape[1]) # the weights at time zero. size: number of features. 
+    maxIter = 10000 # number of iterations. if doesn't work, maybe change to a while loop.
+    m = X.shape[0] # number of samples
+    for t in range(maxIter):
+        for i in range(m): # for each sample i in the training set 
+            if(y[i]*np.dot(X[i,:],w_t) <= 0): 
+                w_t1 = w_t + y[i]*X[i,:]
+                w_t = w_t1 
+                break
+    return w_t
 
 if __name__ == '__main__':
     data_df, labels_df = load_mnist()
