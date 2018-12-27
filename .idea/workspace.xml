@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/air_resources_management/HW_2/latex equations.tex" beforeDir="false" afterPath="$PROJECT_DIR$/air_resources_management/HW_2/latex equations.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistical_ML/HW1/.ipynb_checkpoints/HW1-checkpoint.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistical_ML/HW1/HW1.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistical_ML/HW1/HW1_305702003_032583940.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistical_ML/HW1/notebook.tex" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW1/notebook.tex" afterDir="false" />
-    </list>
+    <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +38,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="810" />
@@ -127,7 +120,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="810" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="810" extended-state="1" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
