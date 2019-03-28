@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="" />
+    <list default="true" id="3d761c49-a939-464e-bccb-89408ad43c8d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HW1/HW1_305702003_032583940.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW1/HW1_305702003_032583940.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HW3/.ipynb_checkpoints/HW3-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW3/.ipynb_checkpoints/HW3-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HW3/HW3.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW3/HW3.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HW5/.ipynb_checkpoints/HW5-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW5/.ipynb_checkpoints/HW5-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statistical_ML/HW5/HW5.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/statistical_ML/HW5/HW5.ipynb" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +45,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="810" />
@@ -48,7 +55,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -65,6 +71,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -120,7 +127,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="810" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="810" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -130,7 +137,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.17146975" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25720462" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2615274" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="4" />
